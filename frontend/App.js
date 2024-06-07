@@ -1,5 +1,6 @@
 import Login from "./Login";
 import Signup from "./Signup";
+import Home from "./Home"
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -14,6 +15,7 @@ export default function App() {
           component={Login}
         />
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
       </NavigationContainer>
     {/* <Login/> */}

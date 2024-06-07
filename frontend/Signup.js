@@ -16,7 +16,7 @@ import axios from "axios";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const backendUrl = 'http://localhost:3000'; // or 'http://127.0.0.1:3000'
+  const backendUrl = 'http://192.168.18.143:3000'//'http://localhost:3000'; // or 'http://127.0.0.1:3000'
   const toggleShowPassword =()=>{
     setHidePass(!hidePass)
   }
@@ -26,11 +26,11 @@ export default function Signup() {
     const response = await axios.post(`${backendUrl}/api/auth/signup`, { email, password });
     if (response.status === 200) {
       // Login successful
-      Alert.alert('Login Successful');
+      Alert.alert('Signup Successful');
       // Navigate to the next screen if needed
     } else {
       // Login failed
-      Alert.alert('Login Failed', response.data.message || 'An error occurred.');
+      Alert.alert('Signup Failed', response.data.message || 'An error occurred.');
     }
   } catch (error) {
     console.error('Error:', error);

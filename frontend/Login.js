@@ -11,26 +11,24 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
-import { Entypo } from '@expo/vector-icons'
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // const [hidePass, setHidePass] = useState(true);
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const backendUrl = 'http://localhost:3000'; // or 'http://127.0.0.1:3000'
+  const backendUrl = 'http://192.168.18.143:3000'//'http://localhost:3000'; // or 'http://127.0.0.1:3000'
 
   const toggleShowPassword =()=>{
     setHidePass(!hidePass)
   }
   const handleLogin = async () => {
+    // Alert.alert('Login Successful', email, ' ',password)
     try {
       const response = await axios.post(`${backendUrl}/api/auth/login`, { email, password });
       if (response.status === 200) {
         // Login successful
         Alert.alert('Login Successful');
-        alert(2)
+        // alert(2)
         navigation.navigate('Home')
         // Navigate to the next screen if needed
       } else {
