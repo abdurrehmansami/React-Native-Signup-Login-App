@@ -1,6 +1,6 @@
-import Login from "./Login";
-import Signup from "./Signup";
-import Home from "./Home"
+import Login from "./src/components/Login";
+import Signup from "./src/components/Signup";
+import Home from "./src/components/Home"
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

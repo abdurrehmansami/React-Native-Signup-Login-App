@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios'; 
 import {
   StyleSheet,
@@ -11,38 +11,47 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
-
 // const [hidePass, setHidePass] = useState(true);
+import { postData } from "../services/NetworkServices";
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const backendUrl = 'http://192.168.18.143:3000'//'http://localhost:3000'; // or 'http://127.0.0.1:3000'
-
+  const backendUrl = 'http://192.168.100.8:3000'//'http://localhost:3000'; // or 'http://127.0.0.1:3000'
+  
   const toggleShowPassword =()=>{
     setHidePass(!hidePass)
   }
   const handleLogin = async () => {
     // Alert.alert('Login Successful', email, ' ',password)
-    try {
-      const response = await axios.post(`${backendUrl}/api/auth/login`, { email, password });
-      if (response.status === 200) {
-        // Login successful
-        Alert.alert('Login Successful');
-        // alert(2)
-        navigation.navigate('Home')
-        // Navigate to the next screen if needed
-      } else {
-        // Login failed
-        Alert.alert('Login Failed', response.data.message || 'An error occurred.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      Alert.alert('Error', 'An error occurred. Please try again later.');
+    // try {
+    //   const response = await axios.post(`${backendUrl}/api/auth/login`, { email, password });
+    //   if (response.status === 200) {
+    //     // Login successful
+    //     Alert.alert('Login Successful');
+    //     // alert(2)
+    //     navigation.navigate('Home')
+    //     // Navigate to the next screen if needed
+    //   } else {
+    //     // Login failed
+    //     Alert.alert('Login Failed', response.data.message || 'An error occurred.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    //   Alert.alert('Error', 'An error occurred. Please try again later.');
+    // }
+    const response = postData('auth/login', { email, password })
+    if (response) {
+      Alert.alert('Login Successful');
+      console.log('RS FOR LOGIN - ', response)
+      navigation.navigate('Home');
+  } else {
+      // Login failed
+      Alert.alert('Login Failed', response.data.message || 'An error occurred.');
     }
   };
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("./assets/log2.png")} /> 
+      <Image style={styles.image} source={require("../../assets/log2.png")} /> 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput

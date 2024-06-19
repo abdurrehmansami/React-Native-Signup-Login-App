@@ -1,3 +1,5 @@
+
+import {REACT_APP_SERVER_URL} from '@env'
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
@@ -13,7 +15,7 @@ import {
 import { Entypo } from '@expo/vector-icons'
 import axios from "axios";
 // const [hidePass, setHidePass] = useState(true);
-export default function Signup() {
+export default function Signup({navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const backendUrl = 'http://192.168.18.143:3000'//'http://localhost:3000'; // or 'http://127.0.0.1:3000'
@@ -23,12 +25,15 @@ export default function Signup() {
 
  const handleSignup = async()=>{
   try {
-    const response = await axios.post(`${backendUrl}/api/auth/signup`, { email, password });
-    if (response.status === 200) {
+    const response = await axios.post(`${REACT_APP_SERVER_URL}auth/signup`, { email, password });
+    if (response) {
       // Login successful
       Alert.alert('Signup Successful');
       // Navigate to the next screen if needed
+      navigation.navigate('Login')
+      console.log(response);
     } else {
+      console.log(response)
       // Login failed
       Alert.alert('Signup Failed', response.data.message || 'An error occurred.');
     }
@@ -39,7 +44,7 @@ export default function Signup() {
  }
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require("./assets/log2.png")} /> 
+      <Image style={styles.image} source={require("../../assets/log2.png")} /> 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
