@@ -118,3 +118,12 @@ export default function App() {
     </NavigationContainer>
   );
 }
+// import React from 'react'
+
+// const Home = () => {
+//   return (
+//     <></>
+//   )
+// }
+
+// export default Home

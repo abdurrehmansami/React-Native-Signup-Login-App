@@ -1,5 +1,4 @@
-frontend/node_modules/
-frontend/.expo/
-backend/node_modules/
-frontend/package-lock.json
-backend/package-lock.json
+*/node_modules/
+*/.expo/
+*/package-lock.json
+.vscode
