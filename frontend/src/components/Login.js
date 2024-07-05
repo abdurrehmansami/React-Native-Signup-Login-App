@@ -15,6 +15,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -52,6 +53,9 @@ export default function Login({ navigation }) {
     try {
       const response = await axios.post(`${REACT_APP_SERVER_URL}auth/login`, { email, password });
       if (response.status === 200) {
+        const { token } = response.data;
+        await AsyncStorage.setItem('token', token); // Store the token
+        console.log('TOKEN',token);
         Alert.alert('Login Successful');
         navigation.navigate('Home');
       } else {
